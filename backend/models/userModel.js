@@ -19,19 +19,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:""
     },
-    searchHistory:{
-        type: Array,
-        default:[]
-    },
+
     myList: {
         type: Array,
         default: []
     },
     ratings: {
-        type: Array,
-        default: []
-    },
-    watchHistory: {
         type: Array,
         default: []
     }

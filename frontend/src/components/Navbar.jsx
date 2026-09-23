@@ -10,7 +10,7 @@ const Navbar = () => {
     const searchInputRef = useRef(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const { logout } = useAuthStore();
+    const { user, logout } = useAuthStore();
 
     // 1. Initialize search query from URL
     const searchParams = new URLSearchParams(location.search);
@@ -136,8 +136,37 @@ const Navbar = () => {
 
                     <Bell className="w-5 h-5 cursor-pointer hidden sm:block hover:text-zinc-300 transition-colors" />
 
-                    {/* Profile Dropdown Trigger / LogOut */}
-                    <LogOut onClick={logout} className="cursor-pointer hover:text-zinc-300 transition-colors" />
+                    {/* Profile Dropdown Trigger */}
+                    <div className="relative group flex items-center cursor-pointer">
+                        <img 
+                            src={(user?.image || "/avatar1.svg").replace('.png', '.svg')} 
+                            alt="Profile" 
+                            className="w-8 h-8 rounded-md object-cover border border-transparent group-hover:border-zinc-500 transition-all duration-300"
+                        />
+                        {/* Dropdown Menu */}
+                        <div className="absolute right-0 top-full mt-4 w-52 bg-black/95 border border-zinc-800 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col pt-2 pb-2">
+                            {/* Triangle pointer */}
+                            <div className="absolute -top-2 right-2 w-4 h-4 bg-black/95 border-t border-l border-zinc-800 rotate-45"></div>
+                            
+                            {/* User Info */}
+                            <div className="px-4 py-3 flex items-center gap-3 relative z-10 border-b border-zinc-800">
+                                <img src={(user?.image || "/avatar1.svg").replace('.png', '.svg')} alt="Profile" className="w-9 h-9 rounded-md object-cover" />
+                                <div className="flex flex-col overflow-hidden">
+                                    <span className="text-sm font-semibold truncate text-white">{user?.username || 'User'}</span>
+                                    <span className="text-xs text-zinc-400 truncate">{user?.email || ''}</span>
+                                </div>
+                            </div>
+
+                            {/* Actions */}
+                            <button 
+                                onClick={logout} 
+                                className="mt-2 px-4 py-3 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/60 flex items-center gap-3 transition-colors relative z-10 w-full text-left"
+                            >
+                                <LogOut className="w-4 h-4" />
+                                Sign out of Quadflix
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

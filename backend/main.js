@@ -10,8 +10,6 @@ import {  protectRoute } from "./middleware/protectRoute.js"
 import searchRoutes from "./routes/searchRoute.js"
 import listRoutes from "./routes/listRoutes.js"
 import ratingRoutes from "./routes/ratingRoutes.js"
-import watchHistoryRoutes from "./routes/watchHistoryRoutes.js"
-
 const app = express();
 const PORT = EN_VARS.PORT;
 const __dirname = path.resolve()
@@ -25,7 +23,6 @@ app.use('/api/tv', protectRoute, tvRoutes)
 app.use('/api/search', protectRoute, searchRoutes)
 app.use('/api/list', listRoutes)
 app.use('/api/rating', protectRoute, ratingRoutes)
-app.use('/api/watch-history', protectRoute, watchHistoryRoutes)
 
 if (EN_VARS.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/frontend/dist")));

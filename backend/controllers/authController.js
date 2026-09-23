@@ -2,7 +2,6 @@ import User from "../models/userModel.js"
 import bcryptjs from "bcryptjs"
 import { generateToken } from "../utils/generateToken.js"
 import { EN_VARS } from "../config/enVars.js"
-import { schemas, validate } from "../utils/validation.js"
 
 export const signup = async (req, res) => {
     // Validation is handled by middleware
@@ -19,7 +18,7 @@ export const signup = async (req, res) => {
 
         const salt = await bcryptjs.genSalt(10)
         const hashedPassword = await bcryptjs.hash(password, salt)
-        const PROFILE_PICS = ["/avatar1.png","/avatar2.png","/avatar3.png"]
+        const PROFILE_PICS = ["/avatar1.svg","/avatar2.svg","/avatar3.svg"]
         const image = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)]
 
         const newUser = new User({

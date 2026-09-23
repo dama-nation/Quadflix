@@ -122,38 +122,6 @@ const schemas = {
     return value;
   }),
 
-  // Watch history validation
-  watchHistory: Joi.object({
-    mediaId: Joi.number().integer().positive().required().messages({
-      'number.base': 'Media ID must be a number',
-      'number.integer': 'Media ID must be an integer',
-      'number.positive': 'Media ID must be a positive number',
-      'any.required': 'Media ID is required'
-    }),
-    mediaType: Joi.string().valid('movie', 'tv').required().messages({
-      'string.empty': 'Media type is required',
-      'string.valid': 'Media type must be either movie or tv'
-    }),
-    progress: Joi.number().min(0).max(100).allow(null).optional().messages({
-      'number.base': 'Progress must be a number',
-      'number.min': 'Progress must be at least 0',
-      'number.max': 'Progress must not exceed 100'
-    }),
-    currentTime: Joi.number().min(0).allow(null).optional().messages({
-      'number.base': 'Current time must be a number',
-      'number.min': 'Current time must be at least 0'
-    }),
-    episode: Joi.number().integer().min(1).allow(null).optional().messages({
-      'number.base': 'Episode must be a number',
-      'number.integer': 'Episode must be an integer',
-      'number.min': 'Episode must be at least 1'
-    }),
-    season: Joi.number().integer().min(1).allow(null).optional().messages({
-      'number.base': 'Season must be a number',
-      'number.integer': 'Season must be an integer',
-      'number.min': 'Season must be at least 1'
-    })
-  })
 };
 
 // Validation middleware
