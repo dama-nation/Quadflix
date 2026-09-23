@@ -1,3 +1,4 @@
+import path from "path"
 import express from "express";
 import authRoutes from "./routes/authRoutes.js"
 import moviesRoutes from "./routes/movieRoutes.js"
@@ -13,6 +14,7 @@ import watchHistoryRoutes from "./routes/watchHistoryRoutes.js"
 
 const app = express();
 const PORT = EN_VARS.PORT;
+const __dirname = path.resolve()
 
 app.use(express.json());
 app.use(cookieParser())
@@ -25,6 +27,15 @@ app.use('/api/list', listRoutes)
 app.use('/api/rating', protectRoute, ratingRoutes)
 app.use('/api/watch-history', protectRoute, watchHistoryRoutes)
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, '/frontend/dist')))
+
+    app.get(/(.*)/, (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+    })
+}
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is up and running on http://localhost:${PORT}`)
@@ -32,15 +43,4 @@ app.listen(PORT, () => {
 
 })
 
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     accept: 'application/json',
-//     Authorization: 'Bearer EN_VARS.TMDB_API_KEY'
-//   }
-// };
 
-// fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
-//   .then(res => res.json())
-//   .then(res => console.log(res))
-//   .catch(err => console.error(err));

@@ -158,23 +158,7 @@ const schemas = {
 
 // Validation middleware
 const validate = (schema) => (req, res, next) => {
-  // Determine what to validate based on schema keys
-  let validationTarget = req.body;
-
-  // If schema doesn't have typical body fields, check if it's for params or query
-  const schemaKeys = Object.keys(schema.describe().keys || {});
-  if (schemaKeys.length === 0) {
-    // Fallback to body validation
-    validationTarget = req.body;
-  } else if (schemaKeys.some(key => ['id'].includes(key))) {
-    // Likely validating params
-    validationTarget = req.params;
-  } else if (schemaKeys.some(key => ['query', 'page', 'limit', 'sort_by', 'year', 'genre', 'type'].includes(key))) {
-    // Likely validating query
-    validationTarget = req.query;
-  }
-
-  const { error } = schema.validate(validationTarget, { abortEarly: false });
+  const { error } = schema.validate(req.body, { abortEarly: false });
 
   if (error) {
     const errors = error.details.map(detail => detail.message);

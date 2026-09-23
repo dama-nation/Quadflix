@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
 import { useAuthStore } from '../../store/authUser';
+import quadflixLogo from '../../assets/quadflix_logo.jpg';
 
 const SignupPage = () => {
     const [username, setUsername] = useState('');
@@ -42,7 +43,7 @@ const SignupPage = () => {
             {/* Branding */}
             <div className="relative z-10 mb-8 text-center flex flex-col items-center animate-[fadeInUp_0.8s_ease-out_forwards]">
                 <Link to="/" className="flex flex-col items-center gap-4 group">
-                    <img src="/src/assets/quadflix_logo.jpg" alt="Quadflix" className="w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] transition-shadow duration-500" />
+                    <img src={quadflixLogo} alt="Quadflix" className="w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] transition-shadow duration-500" />
                     <h1 className="text-3xl md:text-4xl font-black tracking-widest text-white drop-shadow-md">
                         QUAD<span className="text-cyan-500">FLIX</span>
                     </h1>
