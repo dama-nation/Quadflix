@@ -27,7 +27,7 @@ app.use('/api/list', listRoutes)
 app.use('/api/rating', protectRoute, ratingRoutes)
 app.use('/api/watch-history', protectRoute, watchHistoryRoutes)
 
-if (process.env.NODE_ENV === "production") {
+if (EN_VARS.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
     app.get(/(.*)/, (req, res) => {
